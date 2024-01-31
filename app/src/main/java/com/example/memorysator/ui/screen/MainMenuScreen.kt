@@ -25,7 +25,7 @@ import com.example.memorysator.R
 import com.example.memorysator.data.Difficulty
 
 @Composable
-fun MainMenu (modifier: Modifier = Modifier) {
+fun MainMenuScreen (modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -70,6 +70,6 @@ fun MainMenu (modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun MainMenuPreview(){
-    MainMenu()
+fun MainMenuScreenPreview(){
+    MainMenuScreen()
 }
