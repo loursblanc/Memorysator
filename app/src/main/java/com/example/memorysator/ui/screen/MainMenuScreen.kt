@@ -33,7 +33,7 @@ fun MainMenuScreen (modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(id = R.string.app_title),
-            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.app_title_bottom_padding))
+            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.large_vertical_padding))
         )
         Text(text = stringResource(id = R.string.Difficulty_Title))
         Row ( Modifier
