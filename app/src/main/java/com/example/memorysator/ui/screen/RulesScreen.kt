@@ -25,7 +25,7 @@ fun RulesScreen(modifier: Modifier = Modifier ) {
         ){
         Text(
             text = stringResource(id = R.string.rules_title),
-            Modifier.padding(bottom = 20.dp) //dimensionResource(id = R.dimen.app_title_bottom_padding)
+            Modifier.padding(bottom = dimensionResource(id = R.dimen.medium_vertical_padding))
         )
         Text(text = stringResource(id = R.string.rules),
             Modifier.padding(horizontal = dimensionResource(id = R.dimen.paragraph_horizontal_padding))
