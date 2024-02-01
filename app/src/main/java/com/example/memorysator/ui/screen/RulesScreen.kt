@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +37,7 @@ fun RulesScreen(modifier: Modifier = Modifier ) {
             Button(
                 onClick ={ /*Todo*/ },
                 Modifier.padding(vertical = dimensionResource(id = R.dimen.large_vertical_padding))
+                    .width(dimensionResource(id = R.dimen.width_button))
             ){
                 Text(text = stringResource(id = R.string.return_main_menu_button))
             }
