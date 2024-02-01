@@ -14,6 +14,7 @@ import androidx.compose.material3.Button
 
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -71,12 +72,18 @@ fun GameCardCard(photoId: Int, modifier: Modifier = Modifier){
             elevation = CardDefaults.cardElevation(defaultElevation = dimensionResource(id = R.dimen.elevation)),
             shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_card)),
     ){
-        Image(
-            painter = painterResource(id = photoId),
-            contentDescription = "Space",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
+        Box(){
+            Image(
+                painter = painterResource(id = photoId),
+                contentDescription = "Space",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+            IconButton(onClick = { /*TODO*/ }, Modifier.align(Alignment.BottomEnd)) {
+                Image(
+                    painter = painterResource(id = R.drawable.info_icon), contentDescription = "Details")
+            }
+        }
     }
 }
 
