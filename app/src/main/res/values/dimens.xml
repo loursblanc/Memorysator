@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="width_button">148dp</dimen>
-    <dimen name="app_title_bottom_padding">88dp</dimen>
+    <dimen name="large_vertical_padding">88dp</dimen>
+    <dimen name="medium_vertical_padding">20dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="paragraph_horizontal_padding">48dp</dimen>
+    <dimen name="height_card">192dp</dimen>
+    <dimen name="elevation">4dp</dimen>
+    <dimen name="corner_card">4dp</dimen>
 </resources>

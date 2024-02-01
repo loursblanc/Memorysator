@@ -25,7 +25,7 @@ import com.example.memorysator.R
 import com.example.memorysator.data.Difficulty
 
 @Composable
-fun MainMenu (modifier: Modifier = Modifier) {
+fun MainMenuScreen (modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -33,7 +33,7 @@ fun MainMenu (modifier: Modifier = Modifier) {
     ) {
         Text(
             text = stringResource(id = R.string.app_title),
-            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.app_title_bottom_padding))
+            modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.large_vertical_padding))
         )
         Text(text = stringResource(id = R.string.Difficulty_Title))
         Row ( Modifier
@@ -70,6 +70,6 @@ fun MainMenu (modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun MainMenuPreview(){
-    MainMenu()
+fun MainMenuScreenPreview(){
+    MainMenuScreen()
 }
