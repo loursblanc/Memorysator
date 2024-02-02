@@ -11,10 +11,10 @@
       <entry key="GameScreenPreview">
         <State />
       </entry>
-      <entry key="MainMenuPreview">
+      <entry key="app">
         <State />
       </entry>
-      <entry key="app">
+      <entry key="memorysatorNavHost_clickRules_navigatesToRulesScreen()">
         <State />
       </entry>
       <entry key="memorysatorNavHost_verifyStartDestination()">
