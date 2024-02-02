@@ -34,15 +34,18 @@ fun MemorysatorApp(modifier: Modifier = Modifier,navController: NavHostControlle
         }
 
         composable(route = MemorysatorAppScreens.RULES.name){
-            RulesScreen()
+            RulesScreen(onBackToMenuButtonClicked = { navController.popBackStack()})
         }
 
         composable(route = MemorysatorAppScreens.GAME.name){
-            GameScreen()
+            GameScreen(
+                onBackToMenuButtonClicked = { navController.popBackStack()},
+                onDetailsButtonClicked = { navController.navigate((MemorysatorAppScreens.DETAILS.name))}
+            )
         }
 
         composable(route = MemorysatorAppScreens.DETAILS.name){
-            DetailsScreen()
+            DetailsScreen(onBackToMenuButtonClicked = { navController.popBackStack()})
         }
     }
 

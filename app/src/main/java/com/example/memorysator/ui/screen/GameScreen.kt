@@ -35,11 +35,13 @@ val mockupIdPhotosList = listOf<Int>(R.drawable.nasa01, R.drawable.nasa02, R.dra
     R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02,)
 
 @Composable
-fun GameScreen(modifier: Modifier = Modifier ) {
+fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
+               onDetailsButtonClicked: () -> Unit,
+               modifier: Modifier = Modifier ) {
     Box(Modifier.fillMaxSize()){
-        GameCardGrid()
+        GameCardGrid(onDetailsButtonClicked)
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onBackToMenuButtonClicked ,
             Modifier
                 .align(Alignment.BottomCenter)
         ) {
@@ -51,20 +53,20 @@ fun GameScreen(modifier: Modifier = Modifier ) {
 }
 
 @Composable
-fun GameCardGrid(modifier: Modifier = Modifier){
+fun GameCardGrid(onDetailsButtonClicked: () -> Unit,modifier: Modifier = Modifier){
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         //contentPadding = PaddingValues(4.dp)
         //Modifier.padding(dimensionResource(id = R.dimen.medium_vertical_padding))
     ){
         items(mockupIdPhotosList){ idPhoto ->
-            GameCardCard(idPhoto, modifier.padding(dimensionResource(id = R.dimen.small_padding)))
+            GameCardCard(idPhoto,onDetailsButtonClicked, modifier.padding(dimensionResource(id = R.dimen.small_padding)))
         }
     }
 }
 
 @Composable
-fun GameCardCard(photoId: Int, modifier: Modifier = Modifier){
+fun GameCardCard(photoId: Int,onDetailsButtonClicked: () -> Unit, modifier: Modifier = Modifier){
     Card(
         modifier
             .clickable {  /*Todo*/ }
@@ -79,7 +81,7 @@ fun GameCardCard(photoId: Int, modifier: Modifier = Modifier){
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
-            IconButton(onClick = { /*TODO*/ }, Modifier.align(Alignment.BottomEnd)) {
+            IconButton(onClick = onDetailsButtonClicked, Modifier.align(Alignment.BottomEnd)) {
                 Image(
                     painter = painterResource(id = R.drawable.info_icon), contentDescription = "Details")
             }
@@ -90,11 +92,11 @@ fun GameCardCard(photoId: Int, modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun GameCardCardPreview(){
-    GameCardCard(mockupIdPhotosList[0])
+    GameCardCard(mockupIdPhotosList[0],{})
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GameScreenPreview(){
-    GameScreen()
+    GameScreen({},{})
 }
