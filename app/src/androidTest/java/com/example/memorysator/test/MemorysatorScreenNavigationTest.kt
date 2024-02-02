@@ -9,18 +9,22 @@ import com.example.memorysator.ui.MemorysatorApp
 import org.junit.Before
 import org.junit.Rule
 
-@get:Rule
-val composeTestRule = createAndroidComposeRule<ComponentActivity>()
-private lateinit var navController: TestNavHostController
 
-@Before
-fun setupMemorysatorNavHost(){
-    composeTestRule.setContent {
-        navController = TestNavHostController(LocalContext.current).apply {
-            navigatorProvider.addNavigator(ComposeNavigator())
-        }
-        MemorysatorApp() }
-}
 
 class MemorysatorScreenNavigationTest {
+
+    @get:Rule
+    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+    private lateinit var navController: TestNavHostController
+
+    @Before
+    fun setupMemorysatorNavHost(){
+        composeTestRule.setContent {
+            navController = TestNavHostController(LocalContext.current).apply {
+                navigatorProvider.addNavigator(ComposeNavigator())
+            }
+            MemorysatorApp(navController = navController) }
+    }
+
+    
 }
