@@ -25,7 +25,10 @@ import com.example.memorysator.R
 import com.example.memorysator.data.Difficulty
 
 @Composable
-fun MainMenuScreen (modifier: Modifier = Modifier) {
+fun MainMenuScreen (
+    onStartButtonClicked: () -> Unit,
+    onRulesButtonClicked: () -> Unit,
+    modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -55,10 +58,10 @@ fun MainMenuScreen (modifier: Modifier = Modifier) {
             }
         }
         Column (Modifier.padding(top = 50.dp)){
-            Button(onClick = { /*TODO*/ },Modifier.width(dimensionResource(id = R.dimen.width_button))) {
+            Button(onClick = onRulesButtonClicked,Modifier.width(dimensionResource(id = R.dimen.width_button))) {
                 Text(text = stringResource(id = R.string.rules_title))
             }
-            Button(onClick = { /*TODO*/ }, Modifier.width(dimensionResource(id = R.dimen.width_button))) {
+            Button(onClick = onStartButtonClicked , Modifier.width(dimensionResource(id = R.dimen.width_button))) {
                 Text(text = stringResource(id = R.string.start_button))
             }
         }
@@ -71,5 +74,5 @@ fun MainMenuScreen (modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun MainMenuScreenPreview(){
-    MainMenuScreen()
+    //MainMenuScreen ()
 }

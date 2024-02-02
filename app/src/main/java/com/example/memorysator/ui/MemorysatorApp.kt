@@ -12,6 +12,7 @@ import com.example.memorysator.R
 import com.example.memorysator.ui.screen.DetailsScreen
 import com.example.memorysator.ui.screen.GameScreen
 import com.example.memorysator.ui.screen.MainMenuScreen
+import com.example.memorysator.ui.screen.RulesScreen
 
 
 enum class MemorysatorAppScreens(@StringRes val title: Int){
@@ -26,11 +27,14 @@ fun MemorysatorApp(modifier: Modifier = Modifier,navController: NavHostControlle
 
     NavHost(navController = navController, startDestination = MemorysatorAppScreens.MAIN_MENU.name){
         composable(route= MemorysatorAppScreens.MAIN_MENU.name){
-            MainMenuScreen()
+            MainMenuScreen(
+                onStartButtonClicked = {navController.navigate(MemorysatorAppScreens.GAME.name)},
+                onRulesButtonClicked = {navController.navigate(MemorysatorAppScreens.RULES.name)}
+            )
         }
 
-        composable(route = MemorysatorAppScreens.DETAILS.name){
-            DetailsScreen()
+        composable(route = MemorysatorAppScreens.RULES.name){
+            RulesScreen()
         }
 
         composable(route = MemorysatorAppScreens.GAME.name){
