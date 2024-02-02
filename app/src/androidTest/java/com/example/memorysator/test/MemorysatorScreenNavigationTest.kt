@@ -28,10 +28,9 @@ class MemorysatorScreenNavigationTest {
             MemorysatorApp(navController = navController) }
     }
 
-
-@Test
-fun memorysatorNavHost_verifyStartDestination(){
-    assertEquals(MemorysatorAppScreens.MAIN_MENU.name, navController.currentBackStackEntry?.destination?.route)
-}
+    @Test
+    fun memorysatorNavHost_verifyStartDestination(){
+        navController.assertCurrentRouteName(MemorysatorAppScreens.MAIN_MENU.name)
+    }
 
 }
