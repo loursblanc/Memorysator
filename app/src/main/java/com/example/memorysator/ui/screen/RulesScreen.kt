@@ -16,7 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.memorysator.R
 
 @Composable
-fun RulesScreen(modifier: Modifier = Modifier ) {
+fun RulesScreen(onBackToMenuButtonClicked: () -> Unit,
+                modifier: Modifier = Modifier
+){
     Column (
         verticalArrangement =  Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -30,7 +32,7 @@ fun RulesScreen(modifier: Modifier = Modifier ) {
         )
         Spacer(Modifier.weight(1F))
         Button(
-            onClick ={ /*Todo*/ },
+            onClick = onBackToMenuButtonClicked,
             Modifier
                 .padding(vertical = dimensionResource(id = R.dimen.large_vertical_padding))
                 .width(dimensionResource(id = R.dimen.width_button))
@@ -43,5 +45,5 @@ fun RulesScreen(modifier: Modifier = Modifier ) {
 @Preview(showBackground = true)
 @Composable
 fun RulesScreenPreview(){
-    RulesScreen()
+    RulesScreen(onBackToMenuButtonClicked = { })
 }

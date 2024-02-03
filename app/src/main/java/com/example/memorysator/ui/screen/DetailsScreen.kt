@@ -31,7 +31,7 @@ val placeholderDescriptionImage = "Description"
 
 
 @Composable
-fun DetailsScreen(modifier: Modifier = Modifier ) {
+fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit, modifier: Modifier = Modifier ) {
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -47,7 +47,7 @@ fun DetailsScreen(modifier: Modifier = Modifier ) {
         )
         Spacer(modifier = Modifier.weight(1F))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onBackToMenuButtonClicked,
             Modifier
                 .padding(vertical = dimensionResource(id = R.dimen.large_vertical_padding),)
 
@@ -78,5 +78,5 @@ fun DetailsImageCard(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun DetailsScreenPreview(){
-    DetailsScreen()
+    DetailsScreen({})
 }
