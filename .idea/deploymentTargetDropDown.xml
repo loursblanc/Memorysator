@@ -2,13 +2,13 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DetailsScreenPreview">
-        <State />
-      </entry>
       <entry key="MemorysatorScreenNavigationTest">
         <State />
       </entry>
       <entry key="app">
+        <State />
+      </entry>
+      <entry key="memorysatorNavHost_clickBackToMenuOnGameScreen_navigatesToDetailsScreen()">
         <State />
       </entry>
       <entry key="memorysatorNavHost_clickDetailsIconOnGameScreen_navigatesToDetailsScreen()">

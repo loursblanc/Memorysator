@@ -19,7 +19,7 @@ class MemorysatorScreenNavigationTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private lateinit var navController: TestNavHostController
-    val firstElement = 0
+    private val  firstElement = 0
 
     @Before
     fun setupMemorysatorNavHost(){
@@ -77,16 +77,16 @@ class MemorysatorScreenNavigationTest {
 
 
     private fun navigateToRulesScreen(){
-        composeTestRule.onNodeWithStringId(R.string.rules_title).performClick()
+        composeTestRule.onNodeWithStringId(R.string.rules_button).performClick()
     }
 
     private fun  navigateToGameScreen(){
-        composeTestRule.onNodeWithStringId(R.string.start_button).performClick()
+        composeTestRule.onNodeWithStringId(R.string.play_button).performClick()
     }
 
     private fun navigateToDetailsScreen(){
         navigateToGameScreen()
-        composeTestRule.onAllNodesWithTagId(R.string.details_title)[firstElement].performClick()
+        composeTestRule.onAllNodesWithTagId(R.string.details_button)[firstElement].performClick()
     }
 
 }

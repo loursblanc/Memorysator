@@ -59,10 +59,10 @@ fun MainMenuScreen (
         }
         Column (Modifier.padding(top = 50.dp)){
             Button(onClick = onRulesButtonClicked,Modifier.width(dimensionResource(id = R.dimen.width_button))) {
-                Text(text = stringResource(id = R.string.rules_title))
+                Text(text = stringResource(id = R.string.rules_button))
             }
             Button(onClick = onStartButtonClicked , Modifier.width(dimensionResource(id = R.dimen.width_button))) {
-                Text(text = stringResource(id = R.string.start_button))
+                Text(text = stringResource(id = R.string.play_button))
             }
         }
 
