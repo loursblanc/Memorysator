@@ -8,18 +8,6 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="memorysatorNavHost_clickBackToMenuOnGameScreen_navigatesToDetailsScreen()">
-        <State />
-      </entry>
-      <entry key="memorysatorNavHost_clickDetailsIconOnGameScreen_navigatesToDetailsScreen()">
-        <State />
-      </entry>
-      <entry key="memorysatorNavHost_clickRules_navigatesToRulesScreen()">
-        <State />
-      </entry>
-      <entry key="memorysatorNavHost_verifyStartDestination()">
-        <State />
-      </entry>
     </value>
   </component>
 </project>

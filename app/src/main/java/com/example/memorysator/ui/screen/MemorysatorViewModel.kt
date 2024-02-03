@@ -14,6 +14,7 @@ class MemorysatorViewModel : ViewModel() {
 
     fun setDifficulty( difficulty: Difficulty){
         _uiState.update { currentState ->
-            currentState.copy(gameDifficulty = difficulty)}
+            currentState.copy(gameDifficulty = difficulty)
+        }
     }
 }
