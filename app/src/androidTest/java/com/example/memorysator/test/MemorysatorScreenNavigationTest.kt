@@ -19,6 +19,7 @@ class MemorysatorScreenNavigationTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private lateinit var navController: TestNavHostController
+    val firstElement = 0
 
     @Before
     fun setupMemorysatorNavHost(){
@@ -34,6 +35,58 @@ class MemorysatorScreenNavigationTest {
         navController.assertCurrentRouteName(MemorysatorAppScreens.MAIN_MENU.name)
     }
 
-    
+    @Test
+    fun memorysatorNavHost_clickRulesOnMainMenuScreen_navigatesToRulesScreen(){
+        navigateToRulesScreen()
+        navController.assertCurrentRouteName(MemorysatorAppScreens.RULES.name)
+    }
+
+    @Test
+    fun memorysatorNavHost_clickPlayOnMainMenuScreen_navigatesToGameScreen() {
+        navigateToGameScreen()
+        navController.assertCurrentRouteName(MemorysatorAppScreens.GAME.name)
+    }
+    @Test
+    fun memorysatorNavHost_clickDetailsIconOnGameScreen_navigatesToDetailsScreen() {
+        navigateToDetailsScreen()
+        navController.assertCurrentRouteName(MemorysatorAppScreens.DETAILS.name)
+    }
+
+
+    @Test
+    fun memorysatorNavHost_clickBackToMenuOnRulesScreen_navigatesToMainMenuScreen() {
+        navigateToRulesScreen()
+        composeTestRule.onNodeWithStringId(R.string.return_main_menu_button).performClick()
+        navController.assertCurrentRouteName(MemorysatorAppScreens.MAIN_MENU.name)
+    }
+    @Test
+    fun memorysatorNavHost_clickBackToMenuOnGameScreen_navigatesToMainMenuScreen() {
+        navigateToGameScreen()
+        composeTestRule.onNodeWithStringId(R.string.return_main_menu_button).performClick()
+        navController.assertCurrentRouteName(MemorysatorAppScreens.MAIN_MENU.name)
+    }
+
+    @Test
+    fun memorysatorNavHost_clickBackToMenuOnGameScreen_navigatesGameScreen() {
+        navigateToDetailsScreen()
+        composeTestRule.onNodeWithStringId(R.string.return_game_button).performClick()
+        navController.assertCurrentRouteName(MemorysatorAppScreens.GAME.name)
+    }
+
+
+
+
+    private fun navigateToRulesScreen(){
+        composeTestRule.onNodeWithStringId(R.string.rules_title).performClick()
+    }
+
+    private fun  navigateToGameScreen(){
+        composeTestRule.onNodeWithStringId(R.string.start_button).performClick()
+    }
+
+    private fun navigateToDetailsScreen(){
+        navigateToGameScreen()
+        composeTestRule.onAllNodesWithTagId(R.string.details_title)[firstElement].performClick()
+    }
 
 }

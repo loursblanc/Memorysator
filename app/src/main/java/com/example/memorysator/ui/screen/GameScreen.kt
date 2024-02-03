@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -81,9 +82,14 @@ fun GameCardCard(photoId: Int,onDetailsButtonClicked: () -> Unit, modifier: Modi
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
-            IconButton(onClick = onDetailsButtonClicked, Modifier.align(Alignment.BottomEnd)) {
+            IconButton(onClick = onDetailsButtonClicked,
+                Modifier.align(Alignment.BottomEnd)
+                    .testTag(stringResource(id = R.string.details_title))
+            ) {
                 Image(
-                    painter = painterResource(id = R.drawable.info_icon), contentDescription = "Details")
+                    painter = painterResource(id = R.drawable.info_icon), 
+                    contentDescription = "Details",
+                )
             }
         }
     }
