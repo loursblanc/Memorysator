@@ -33,7 +33,9 @@ fun MemorysatorApp(modifier: Modifier = Modifier,navController: NavHostControlle
         composable(route= MemorysatorAppScreens.MAIN_MENU.name){
             MainMenuScreen(
                 onStartButtonClicked = {navController.navigate(MemorysatorAppScreens.GAME.name)},
-                onRulesButtonClicked = {navController.navigate(MemorysatorAppScreens.RULES.name)}
+                onRulesButtonClicked = {navController.navigate(MemorysatorAppScreens.RULES.name)},
+                onSelectionChanged = {viewModel.setDifficulty(it)},
+                uiState = uiState
             )
         }
 
