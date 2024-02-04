@@ -30,7 +30,7 @@ import com.example.memorysator.network.Photo
 
 @Composable
 fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
-               onDetailsButtonClicked: () -> Unit,
+               onDetailsButtonClicked: (Photo) -> Unit,
                uiState: MemorysatorUiState,
                modifier: Modifier = Modifier ) {
     Box(Modifier.fillMaxSize()){
@@ -48,18 +48,18 @@ fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
 }
 
 @Composable
-fun GameCardGrid(onDetailsButtonClicked: () -> Unit, photos: List<Photo>, modifier: Modifier = Modifier){
+fun GameCardGrid(onDetailsButtonClicked: (Photo) -> Unit, photos: List<Photo>, modifier: Modifier = Modifier){
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
     ){
         items(photos){ Photo ->
-            GameCardCard(Photo.url,onDetailsButtonClicked, modifier.padding(dimensionResource(id = R.dimen.small_padding)))
+            GameCardCard(Photo,onDetailsButtonClicked, modifier.padding(dimensionResource(id = R.dimen.small_padding)))
         }
     }
 }
 
 @Composable
-fun GameCardCard(url: Int, onDetailsButtonClicked: () -> Unit, modifier: Modifier = Modifier){
+fun GameCardCard(photo: Photo, onDetailsButtonClicked: (Photo) -> Unit, modifier: Modifier = Modifier){
     Card(
         modifier
             .clickable {  /*Todo*/ }
@@ -69,12 +69,12 @@ fun GameCardCard(url: Int, onDetailsButtonClicked: () -> Unit, modifier: Modifie
     ){
         Box(){
             Image(
-                painter = painterResource(id = url),
+                painter = painterResource(id = photo.url),
                 contentDescription = "Space",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
-            IconButton(onClick = onDetailsButtonClicked,
+            IconButton(onClick = { onDetailsButtonClicked(photo) },
                 Modifier.align(Alignment.BottomEnd)
                     .testTag(stringResource(id = R.string.details_button))
             ) {
@@ -90,7 +90,18 @@ fun GameCardCard(url: Int, onDetailsButtonClicked: () -> Unit, modifier: Modifie
 @Preview(showBackground = true)
 @Composable
 fun GameCardCardPreview(){
-    GameCardCard(R.drawable.nasa01,{})
+    val photo = Photo(
+        title = "M2-9: Wings of a Butterfly Nebula",
+        url = R.drawable.nasa01,
+        explanation = "Are stars better appreciated for their art after t" +
+                " gas frequently forms an impressive display called a planetary nebula that fades gradually over thousand of years. " +
+                "M2-9, a butterfly planetary nebula 2100 light-years away shown in representative colors, has wings that tell a strange but incomplete tale. " +
+                "In the center, two stars orbit inside a gaseous disk 10 times the orbit of Pluto. The expelled envelope of the dying star breaks out from the disk " +
+                "creating the bipolar appearance. Much remains unknown about the physical processes that cause planetary nebulae.",
+        mediaType = "image",
+        copyright = null
+    )
+    GameCardCard(photo,{})
 }
 
 @Preview(showBackground = true)

@@ -2,6 +2,7 @@ package com.example.memorysator.ui.screen
 
 import androidx.lifecycle.ViewModel
 import com.example.memorysator.data.Difficulty
+import com.example.memorysator.network.Photo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
