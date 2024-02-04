@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.IconButton
@@ -26,20 +25,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.memorysator.R
+import com.example.memorysator.network.Photo
 
-
-val mockupIdPhotosList = listOf<Int>(R.drawable.nasa01, R.drawable.nasa02, R.drawable.nasa03,
-    R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02, R.drawable.nasa03,
-    R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02, R.drawable.nasa03,
-    R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02, R.drawable.nasa03,
-    R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02,)
 
 @Composable
 fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
                onDetailsButtonClicked: () -> Unit,
+               uiState: MemorysatorUiState,
                modifier: Modifier = Modifier ) {
     Box(Modifier.fillMaxSize()){
-        GameCardGrid(onDetailsButtonClicked)
+        GameCardGrid(onDetailsButtonClicked,uiState.Photos)
         Button(
             onClick = onBackToMenuButtonClicked ,
             Modifier
@@ -53,20 +48,18 @@ fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
 }
 
 @Composable
-fun GameCardGrid(onDetailsButtonClicked: () -> Unit,modifier: Modifier = Modifier){
+fun GameCardGrid(onDetailsButtonClicked: () -> Unit, photos: List<Photo>, modifier: Modifier = Modifier){
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
-        //contentPadding = PaddingValues(4.dp)
-        //Modifier.padding(dimensionResource(id = R.dimen.medium_vertical_padding))
     ){
-        items(mockupIdPhotosList){ idPhoto ->
-            GameCardCard(idPhoto,onDetailsButtonClicked, modifier.padding(dimensionResource(id = R.dimen.small_padding)))
+        items(photos){ Photo ->
+            GameCardCard(Photo.url,onDetailsButtonClicked, modifier.padding(dimensionResource(id = R.dimen.small_padding)))
         }
     }
 }
 
 @Composable
-fun GameCardCard(photoId: Int,onDetailsButtonClicked: () -> Unit, modifier: Modifier = Modifier){
+fun GameCardCard(url: Int, onDetailsButtonClicked: () -> Unit, modifier: Modifier = Modifier){
     Card(
         modifier
             .clickable {  /*Todo*/ }
@@ -76,7 +69,7 @@ fun GameCardCard(photoId: Int,onDetailsButtonClicked: () -> Unit, modifier: Modi
     ){
         Box(){
             Image(
-                painter = painterResource(id = photoId),
+                painter = painterResource(id = url),
                 contentDescription = "Space",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -97,11 +90,11 @@ fun GameCardCard(photoId: Int,onDetailsButtonClicked: () -> Unit, modifier: Modi
 @Preview(showBackground = true)
 @Composable
 fun GameCardCardPreview(){
-    GameCardCard(mockupIdPhotosList[0],{})
+    GameCardCard(R.drawable.nasa01,{})
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GameScreenPreview(){
-    GameScreen({},{})
+    GameScreen({},{},uiState = MemorysatorUiState())
 }
