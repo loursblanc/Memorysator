@@ -18,4 +18,10 @@ class MemorysatorViewModel : ViewModel() {
             currentState.copy(gameDifficulty = difficulty)
         }
     }
+
+    fun setCurrentPhoto(currentPhoto: Photo){
+        _uiState.update { currentState ->
+            currentState.copy(currentPhoto = currentPhoto)
+        }
+    }
 }

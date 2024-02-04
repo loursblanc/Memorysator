@@ -34,7 +34,7 @@ fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
                uiState: MemorysatorUiState,
                modifier: Modifier = Modifier ) {
     Box(Modifier.fillMaxSize()){
-        GameCardGrid(onDetailsButtonClicked,uiState.Photos)
+        GameCardGrid(onDetailsButtonClicked,uiState.photos)
         Button(
             onClick = onBackToMenuButtonClicked ,
             Modifier
