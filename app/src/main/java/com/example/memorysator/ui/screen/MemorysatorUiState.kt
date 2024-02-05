@@ -7,5 +7,5 @@ import com.example.memorysator.network.Photo
 data class MemorysatorUiState(
     val currentPhoto: Photo = Photo("","","",""),
     val gameDifficulty: Difficulty = Difficulty.EASY,
-    val photos :List<Photo> = FakeDatasource.mockupIdPhotosList,
+    val photos :List<Photo> = emptyList()
 )

@@ -1,9 +1,12 @@
 package com.example.memorysator.ui.screen
 
 import androidx.lifecycle.ViewModel
+
 import androidx.lifecycle.viewModelScope
+import com.example.memorysator.data.ApodPhotosRepository
 import com.example.memorysator.data.Difficulty
-import com.example.memorysator.network.NasaApi
+import com.example.memorysator.network.NasaApiService
+
 import com.example.memorysator.network.Photo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,14 +31,14 @@ class MemorysatorViewModel : ViewModel() {
         }
     }
 
-    fun getApodPhotos() : Int{
-        val response = NasaApi.retrofitService.getApodPhotos().execute()
-
-        if (response.isSuccessful) {
-            val photos = response.body()
-            return photos?.size ?: 0
-        }else{
-            return 0
+    fun getApodPhotos(){
+        //viewModelScope.launch{
+           // val apodPhotosRepository = ApodPhotosRepository.NetWorkApodPhotosRepository(NasaApiService)
+            //val apodPhotos = apodPhotosRepository.getApodPhotos()
+            //_uiState.update { currentState ->
+              //  currentState.copy(photos = apodPhotos)
+            //}
         }
+
     }
-}
+//}
