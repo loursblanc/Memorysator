@@ -27,7 +27,11 @@ enum class MemorysatorAppScreens(@StringRes val title: Int){
 }
 
 @Composable
-fun MemorysatorApp(modifier: Modifier = Modifier,navController: NavHostController = rememberNavController(),viewModel: MemorysatorViewModel = viewModel()) {
+fun MemorysatorApp(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+    viewModel: MemorysatorViewModel = viewModel(factory = MemorysatorViewModel.Factory)
+) {
 
     val uiState by viewModel.uiState.collectAsState()
     NavHost(navController = navController, startDestination = MemorysatorAppScreens.MAIN_MENU.name){
