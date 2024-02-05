@@ -38,7 +38,7 @@ fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit,photo: Photo, modifier: 
             text = photo.title,
             Modifier.padding(bottom = dimensionResource(id = R.dimen.medium_vertical_padding))
         )
-        DetailsImageCard(photo.url)
+        DetailsImageCard(R.drawable.nasa01)
         Text(
             text = photo.explanation,
             Modifier.padding(horizontal = dimensionResource(id = R.dimen.paragraph_horizontal_padding))
@@ -78,7 +78,7 @@ fun DetailsImageCard(photoUrl: Int,modifier: Modifier = Modifier){
 fun DetailsScreenPreview(){
     val photo = Photo(
         title = "M2-9: Wings of a Butterfly Nebula",
-        url = R.drawable.nasa01,
+        //url = R.drawable.nasa01,
         explanation = "Are stars better appreciated for their art after t" +
                 " gas frequently forms an impressive display called a planetary nebula that fades gradually over thousand of years. " +
                 "M2-9, a butterfly planetary nebula 2100 light-years away shown in representative colors, has wings that tell a strange but incomplete tale. " +

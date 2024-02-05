@@ -15,7 +15,7 @@ class MemorysatorViewModelTest {
     fun memorysatorViewModel_Initilization_DefaultMemorysatorUiState(){
         val memorysatorUiState = viewModel.uiState.value
         val defaultDifficulty = Difficulty.EASY
-        val defaultCurrentPhoto = Photo("",0,"","","")
+        val defaultCurrentPhoto = Photo("","","","",)
         assertEquals(defaultDifficulty,memorysatorUiState.gameDifficulty)
         assertEquals(defaultCurrentPhoto,memorysatorUiState.currentPhoto)
         //assertEquals(defaultCurrentPhoto,memorysatorUiState.photos)
@@ -29,11 +29,16 @@ class MemorysatorViewModelTest {
     }
 
     @Test
-    fun memorysatorVIewModel_ChangedCurrentPhoto_UiStateCurrentDifficultyChange(){
-        val photoTest = Photo ("Test",0,"test","image","none")
+    fun memorysatorViewModel_ChangedCurrentPhoto_UiStateCurrentDifficultyChange(){
+        val photoTest = Photo ("Test","","test","image",)
         viewModel.setCurrentPhoto(photoTest)
         val memorysatorUiState = viewModel.uiState.value
         assertEquals(photoTest,memorysatorUiState.currentPhoto)
+    }
+    @Test
+    fun memorysatorViewModel_LoadPhotoFromNasaApi_ListPhotosHave2Items(){
+        val photosSize = viewModel.getApodPhotos()
+        assertEquals(2,photosSize)
     }
 
 }
