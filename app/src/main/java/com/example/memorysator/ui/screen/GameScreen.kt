@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.IconButton
@@ -26,20 +25,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.memorysator.R
+import com.example.memorysator.network.Photo
 
-
-val mockupIdPhotosList = listOf<Int>(R.drawable.nasa01, R.drawable.nasa02, R.drawable.nasa03,
-    R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02, R.drawable.nasa03,
-    R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02, R.drawable.nasa03,
-    R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02, R.drawable.nasa03,
-    R.drawable.nasa04, R.drawable.nasa05, R.drawable.nasa02,R.drawable.nasa01, R.drawable.nasa02,)
 
 @Composable
 fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
-               onDetailsButtonClicked: () -> Unit,
+               onDetailsButtonClicked: (Photo) -> Unit,
+               uiState: MemorysatorUiState,
                modifier: Modifier = Modifier ) {
     Box(Modifier.fillMaxSize()){
-        GameCardGrid(onDetailsButtonClicked)
+        GameCardGrid(onDetailsButtonClicked,uiState.photos)
         Button(
             onClick = onBackToMenuButtonClicked ,
             Modifier
@@ -53,20 +48,18 @@ fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
 }
 
 @Composable
-fun GameCardGrid(onDetailsButtonClicked: () -> Unit,modifier: Modifier = Modifier){
+fun GameCardGrid(onDetailsButtonClicked: (Photo) -> Unit, photos: List<Photo>, modifier: Modifier = Modifier){
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
-        //contentPadding = PaddingValues(4.dp)
-        //Modifier.padding(dimensionResource(id = R.dimen.medium_vertical_padding))
     ){
-        items(mockupIdPhotosList){ idPhoto ->
-            GameCardCard(idPhoto,onDetailsButtonClicked, modifier.padding(dimensionResource(id = R.dimen.small_padding)))
+        items(photos){ Photo ->
+            GameCardCard(Photo,onDetailsButtonClicked, modifier.padding(dimensionResource(id = R.dimen.small_padding)))
         }
     }
 }
 
 @Composable
-fun GameCardCard(photoId: Int,onDetailsButtonClicked: () -> Unit, modifier: Modifier = Modifier){
+fun GameCardCard(photo: Photo, onDetailsButtonClicked: (Photo) -> Unit, modifier: Modifier = Modifier){
     Card(
         modifier
             .clickable {  /*Todo*/ }
@@ -76,12 +69,12 @@ fun GameCardCard(photoId: Int,onDetailsButtonClicked: () -> Unit, modifier: Modi
     ){
         Box(){
             Image(
-                painter = painterResource(id = photoId),
+                painter = painterResource(id = photo.url),
                 contentDescription = "Space",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
-            IconButton(onClick = onDetailsButtonClicked,
+            IconButton(onClick = { onDetailsButtonClicked(photo) },
                 Modifier.align(Alignment.BottomEnd)
                     .testTag(stringResource(id = R.string.details_button))
             ) {
@@ -97,11 +90,22 @@ fun GameCardCard(photoId: Int,onDetailsButtonClicked: () -> Unit, modifier: Modi
 @Preview(showBackground = true)
 @Composable
 fun GameCardCardPreview(){
-    GameCardCard(mockupIdPhotosList[0],{})
+    val photo = Photo(
+        title = "M2-9: Wings of a Butterfly Nebula",
+        url = R.drawable.nasa01,
+        explanation = "Are stars better appreciated for their art after t" +
+                " gas frequently forms an impressive display called a planetary nebula that fades gradually over thousand of years. " +
+                "M2-9, a butterfly planetary nebula 2100 light-years away shown in representative colors, has wings that tell a strange but incomplete tale. " +
+                "In the center, two stars orbit inside a gaseous disk 10 times the orbit of Pluto. The expelled envelope of the dying star breaks out from the disk " +
+                "creating the bipolar appearance. Much remains unknown about the physical processes that cause planetary nebulae.",
+        mediaType = "image",
+        copyright = null
+    )
+    GameCardCard(photo,{})
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GameScreenPreview(){
-    GameScreen({},{})
+    GameScreen({},{},uiState = MemorysatorUiState())
 }

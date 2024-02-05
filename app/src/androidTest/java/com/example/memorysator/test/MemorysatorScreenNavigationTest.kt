@@ -52,7 +52,6 @@ class MemorysatorScreenNavigationTest {
         navController.assertCurrentRouteName(MemorysatorAppScreens.DETAILS.name)
     }
 
-
     @Test
     fun memorysatorNavHost_clickBackToMenuOnRulesScreen_navigatesToMainMenuScreen() {
         navigateToRulesScreen()
@@ -72,8 +71,6 @@ class MemorysatorScreenNavigationTest {
         composeTestRule.onNodeWithStringId(R.string.return_game_button).performClick()
         navController.assertCurrentRouteName(MemorysatorAppScreens.GAME.name)
     }
-
-
 
 
     private fun navigateToRulesScreen(){

@@ -28,6 +28,8 @@ import com.example.memorysator.data.Difficulty
 fun MainMenuScreen (
     onStartButtonClicked: () -> Unit,
     onRulesButtonClicked: () -> Unit,
+    onSelectionChanged: (Difficulty) -> Unit,
+    uiState: MemorysatorUiState,
     modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -49,10 +51,11 @@ fun MainMenuScreen (
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.selectableGroup()
                 ){
-                    RadioButton(selected = true, onClick = { /*TODO*/ })
+                    RadioButton(selected = (uiState.gameDifficulty == difficulty),
+                        onClick = { onSelectionChanged(difficulty) }
+                    )
                     Text(
                         text = stringResource(id = difficulty.id),
-                       //modifier = Modifier.padding(top = 2.dp) // Espacement avec le RadioButton
                     )
                 }
             }
@@ -74,5 +77,5 @@ fun MainMenuScreen (
 @Preview(showBackground = true)
 @Composable
 fun MainMenuScreenPreview(){
-    //MainMenuScreen ()
+    MainMenuScreen ({},{},{}, uiState = MemorysatorUiState(gameDifficulty = Difficulty.EASY))
 }

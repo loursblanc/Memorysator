@@ -1,11 +1,15 @@
 package com.example.memorysator.ui.screen
 
+import android.widget.ScrollView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -18,31 +22,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.memorysator.R
+import com.example.memorysator.network.Photo
 
-//Todo delete when data is connected
-val placeHolderTitle = "Image Title"
-val placeHolderDescriptions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do " +
-        "eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, " +
-        "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis " +
-        "aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla " +
-        "pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt " +
-        "mollit anim id est laborum."
-val placeholderDescriptionImage = "Description"
+
 
 
 @Composable
-fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit, modifier: Modifier = Modifier ) {
+fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit,photo: Photo, modifier: Modifier = Modifier ) {
     Column (
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.verticalScroll(rememberScrollState())
     ) {
         Text(
-            text = placeHolderTitle,
+            text = photo.title,
             Modifier.padding(bottom = dimensionResource(id = R.dimen.medium_vertical_padding))
         )
-        DetailsImageCard()
+        DetailsImageCard(photo.url)
         Text(
-            text = placeHolderDescriptions,
+            text = photo.explanation,
             Modifier.padding(horizontal = dimensionResource(id = R.dimen.paragraph_horizontal_padding))
         )
         Spacer(modifier = Modifier.weight(1F))
@@ -61,7 +59,7 @@ fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit, modifier: Modifier = Mo
 }
 
 @Composable
-fun DetailsImageCard(modifier: Modifier = Modifier){
+fun DetailsImageCard(photoUrl: Int,modifier: Modifier = Modifier){
     Card (
         Modifier
             .padding(bottom = dimensionResource(id = R.dimen.medium_vertical_padding))
@@ -69,8 +67,8 @@ fun DetailsImageCard(modifier: Modifier = Modifier){
         elevation = CardDefaults.cardElevation(defaultElevation = dimensionResource(id = R.dimen.elevation))
     ){
         Image(painter = painterResource(
-            id = R.drawable.nasa02),
-            contentDescription = placeholderDescriptionImage
+            id = photoUrl),
+            contentDescription = ""
         )
     }
 }
@@ -78,5 +76,16 @@ fun DetailsImageCard(modifier: Modifier = Modifier){
 @Preview(showBackground = true)
 @Composable
 fun DetailsScreenPreview(){
-    DetailsScreen({})
+    val photo = Photo(
+        title = "M2-9: Wings of a Butterfly Nebula",
+        url = R.drawable.nasa01,
+        explanation = "Are stars better appreciated for their art after t" +
+                " gas frequently forms an impressive display called a planetary nebula that fades gradually over thousand of years. " +
+                "M2-9, a butterfly planetary nebula 2100 light-years away shown in representative colors, has wings that tell a strange but incomplete tale. " +
+                "In the center, two stars orbit inside a gaseous disk 10 times the orbit of Pluto. The expelled envelope of the dying star breaks out from the disk " +
+                "creating the bipolar appearance. Much remains unknown about the physical processes that cause planetary nebulae.",
+        mediaType = "image",
+        copyright = null
+    )
+    DetailsScreen({},photo)
 }
