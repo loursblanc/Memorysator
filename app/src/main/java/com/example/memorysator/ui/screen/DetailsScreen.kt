@@ -1,11 +1,15 @@
 package com.example.memorysator.ui.screen
 
+import android.widget.ScrollView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,7 +31,8 @@ import com.example.memorysator.network.Photo
 fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit,photo: Photo, modifier: Modifier = Modifier ) {
     Column (
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier.verticalScroll(rememberScrollState())
     ) {
         Text(
             text = photo.title,
