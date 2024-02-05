@@ -2,15 +2,22 @@ package com.example.memorysator
 
 
 import com.example.memorysator.data.Difficulty
+import com.example.memorysator.fake.FakeDataSource
+import com.example.memorysator.fake.FakeNetworkApodPhotosRepository
 import com.example.memorysator.network.Photo
+import com.example.memorysator.rules.TestDipatcherRule
 import com.example.memorysator.ui.screen.MemorysatorViewModel
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Rule
 import org.junit.Test
 
 
 class MemorysatorViewModelTest {
-    private val viewModel = MemorysatorViewModel()
 
+    private val viewModel = MemorysatorViewModel(apodPhotosRepository = FakeNetworkApodPhotosRepository())
+    @get:Rule
+    val testDispatcher = TestDipatcherRule()
     @Test
     fun memorysatorViewModel_Initilization_DefaultMemorysatorUiState(){
         val memorysatorUiState = viewModel.uiState.value
@@ -35,5 +42,12 @@ class MemorysatorViewModelTest {
         val memorysatorUiState = viewModel.uiState.value
         assertEquals(photoTest,memorysatorUiState.currentPhoto)
     }
+
+    @Test
+    fun memorysatorViewModel_getApodPhotos_verifyMemorisatorUiStatePhotos() =
+        runTest {
+            viewModel.getApodPhotos()
+            assertEquals(FakeDataSource.mockupPhotosList, viewModel.uiState.value.photos)
+        }
 
 }
