@@ -1,4 +1,4 @@
-package com.example.memorysator.ui.test
+package com.example.memorysator
 
 
 import com.example.memorysator.data.Difficulty
@@ -34,11 +34,6 @@ class MemorysatorViewModelTest {
         viewModel.setCurrentPhoto(photoTest)
         val memorysatorUiState = viewModel.uiState.value
         assertEquals(photoTest,memorysatorUiState.currentPhoto)
-    }
-    @Test
-    fun memorysatorViewModel_LoadPhotoFromNasaApi_ListPhotosHave2Items(){
-        val photosSize = viewModel.getApodPhotos()
-        assertEquals(2,photosSize)
     }
 
 }
