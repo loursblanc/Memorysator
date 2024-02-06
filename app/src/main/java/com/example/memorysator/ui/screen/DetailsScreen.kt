@@ -17,10 +17,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.memorysator.R
 import com.example.memorysator.network.Photo
 
@@ -38,7 +42,7 @@ fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit,photo: Photo, modifier: 
             text = photo.title,
             Modifier.padding(bottom = dimensionResource(id = R.dimen.medium_vertical_padding))
         )
-        DetailsImageCard(R.drawable.nasa01)
+        DetailsImageCard(photo.url)
         Text(
             text = photo.explanation,
             Modifier.padding(horizontal = dimensionResource(id = R.dimen.paragraph_horizontal_padding))
@@ -59,16 +63,21 @@ fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit,photo: Photo, modifier: 
 }
 
 @Composable
-fun DetailsImageCard(photoUrl: Int,modifier: Modifier = Modifier){
+fun DetailsImageCard(photoUrl: String,modifier: Modifier = Modifier){
     Card (
         Modifier
             .padding(bottom = dimensionResource(id = R.dimen.medium_vertical_padding))
             .padding(horizontal = dimensionResource(id = R.dimen.small_padding)),
         elevation = CardDefaults.cardElevation(defaultElevation = dimensionResource(id = R.dimen.elevation))
     ){
-        Image(painter = painterResource(
-            id = photoUrl),
-            contentDescription = ""
+        AsyncImage(
+            model = ImageRequest.Builder(context = LocalContext.current)
+                .data(photoUrl)
+                .crossfade(true)
+                .build(),
+            contentDescription = "Space",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
     }
 }
@@ -78,7 +87,7 @@ fun DetailsImageCard(photoUrl: Int,modifier: Modifier = Modifier){
 fun DetailsScreenPreview(){
     val photo = Photo(
         title = "M2-9: Wings of a Butterfly Nebula",
-        //url = R.drawable.nasa01,
+        url = "https://apod.nasa.gov/apod/image/0206/eclipsebird_staiger.jpg",
         explanation = "Are stars better appreciated for their art after t" +
                 " gas frequently forms an impressive display called a planetary nebula that fades gradually over thousand of years. " +
                 "M2-9, a butterfly planetary nebula 2100 light-years away shown in representative colors, has wings that tell a strange but incomplete tale. " +

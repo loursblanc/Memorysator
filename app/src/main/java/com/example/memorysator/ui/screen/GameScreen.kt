@@ -19,11 +19,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.memorysator.R
 import com.example.memorysator.network.Photo
 
@@ -68,8 +71,11 @@ fun GameCardCard(photo: Photo, onDetailsButtonClicked: (Photo) -> Unit, modifier
             shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_card)),
     ){
         Box(){
-            Image(
-                painter = painterResource(id = R.drawable.nasa01),
+            AsyncImage(
+                model = ImageRequest.Builder(context = LocalContext.current)
+                    .data(photo.url)
+                    .crossfade(true)
+                    .build(),
                 contentDescription = "Space",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -92,7 +98,7 @@ fun GameCardCard(photo: Photo, onDetailsButtonClicked: (Photo) -> Unit, modifier
 fun GameCardCardPreview(){
     val photo = Photo(
         title = "M2-9: Wings of a Butterfly Nebula",
-        //url = R.drawable.nasa01,
+        url = "https://apod.nasa.gov/apod/image/0206/eclipsebird_staiger.jpg",
         explanation = "Are stars better appreciated for their art after t" +
                 " gas frequently forms an impressive display called a planetary nebula that fades gradually over thousand of years. " +
                 "M2-9, a butterfly planetary nebula 2100 light-years away shown in representative colors, has wings that tell a strange but incomplete tale. " +
