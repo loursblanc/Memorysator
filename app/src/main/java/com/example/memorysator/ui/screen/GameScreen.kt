@@ -69,7 +69,7 @@ fun GameCardCard(photo: Photo, onDetailsButtonClicked: (Photo) -> Unit, modifier
     ){
         Box(){
             Image(
-                painter = painterResource(id = photo.url),
+                painter = painterResource(id = R.drawable.nasa01),
                 contentDescription = "Space",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
@@ -92,7 +92,7 @@ fun GameCardCard(photo: Photo, onDetailsButtonClicked: (Photo) -> Unit, modifier
 fun GameCardCardPreview(){
     val photo = Photo(
         title = "M2-9: Wings of a Butterfly Nebula",
-        url = R.drawable.nasa01,
+        //url = R.drawable.nasa01,
         explanation = "Are stars better appreciated for their art after t" +
                 " gas frequently forms an impressive display called a planetary nebula that fades gradually over thousand of years. " +
                 "M2-9, a butterfly planetary nebula 2100 light-years away shown in representative colors, has wings that tell a strange but incomplete tale. " +
