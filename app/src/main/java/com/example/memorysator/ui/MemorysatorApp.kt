@@ -17,6 +17,7 @@ import com.example.memorysator.ui.screen.MemorysatorViewModel
 import com.example.memorysator.ui.screen.RulesScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.memorysator.network.Photo
+import kotlinx.coroutines.coroutineScope
 
 
 enum class MemorysatorAppScreens(@StringRes val title: Int){
@@ -37,7 +38,9 @@ fun MemorysatorApp(
     NavHost(navController = navController, startDestination = MemorysatorAppScreens.MAIN_MENU.name){
         composable(route= MemorysatorAppScreens.MAIN_MENU.name){
             MainMenuScreen(
-                onStartButtonClicked = {navController.navigate(MemorysatorAppScreens.GAME.name)},
+                onStartButtonClicked = {
+                    viewModel.getApodPhotos()
+                    navController.navigate(MemorysatorAppScreens.GAME.name)},
                 onRulesButtonClicked = {navController.navigate(MemorysatorAppScreens.RULES.name)},
                 onSelectionChanged = {viewModel.setDifficulty(it)},
                 uiState = uiState

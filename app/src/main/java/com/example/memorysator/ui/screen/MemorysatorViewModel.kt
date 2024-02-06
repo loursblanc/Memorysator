@@ -10,8 +10,6 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.memorysator.MemorysatorApplication
 import com.example.memorysator.data.ApodPhotosRepository
 import com.example.memorysator.data.Difficulty
-import com.example.memorysator.network.NasaApiService
-
 import com.example.memorysator.network.Photo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -38,7 +36,6 @@ class MemorysatorViewModel (private val apodPhotosRepository: ApodPhotosReposito
 
     fun getApodPhotos(){
         viewModelScope.launch{
-           // val apodPhotosRepository = ApodPhotosRepository.NetWorkApodPhotosRepository(NasaApiService)
             val apodPhotos = apodPhotosRepository.getApodPhotos()
             _uiState.update { currentState ->
                 currentState.copy(photos = apodPhotos)
