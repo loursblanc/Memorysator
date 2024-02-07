@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class MemorysatorViewModel (private val apodPhotosRepository: ApodPhotosRepository): ViewModel() {
     private val _uiState = MutableStateFlow(MemorysatorUiState())
@@ -36,9 +37,18 @@ class MemorysatorViewModel (private val apodPhotosRepository: ApodPhotosReposito
 
     fun getApodPhotos(){
         viewModelScope.launch{
-            val apodPhotos = apodPhotosRepository.getApodPhotos()
             _uiState.update { currentState ->
-                currentState.copy(photos = apodPhotos)
+                currentState.copy(apiState = ConnectionState.LOADING)
+            }
+            try{
+                val apodPhotos = apodPhotosRepository.getApodPhotos()
+                _uiState.update { currentState ->
+                    currentState.copy(photos = apodPhotos, apiState = ConnectionState.LOADING)
+                }
+            }catch (e:IOException){
+                _uiState.update { currentState ->
+                    currentState.copy(apiState = ConnectionState.ERROR)
+                }
             }
         }
     }
