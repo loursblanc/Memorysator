@@ -76,6 +76,8 @@ fun DetailsImageCard(photoUrl: String,modifier: Modifier = Modifier){
                 .crossfade(true)
                 .build(),
             contentDescription = "Space",
+            error = painterResource(R.drawable.ic_broken_image),
+            placeholder = painterResource(R.drawable.loading_img),
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
