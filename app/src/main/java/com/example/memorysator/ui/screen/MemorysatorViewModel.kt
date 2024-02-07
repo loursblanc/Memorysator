@@ -44,7 +44,7 @@ class MemorysatorViewModel (private val apodPhotosRepository: ApodPhotosReposito
             try {
                 val apodPhotos = apodPhotosRepository.getApodPhotos()
                 _uiState.update { currentState ->
-                    currentState.copy(photos = apodPhotos, apiState = ConnectionState.LOADING)
+                    currentState.copy(photos = apodPhotos, apiState = ConnectionState.SUCESS)
                 }
             } catch (e: IOException) {
                 _uiState.update { currentState ->
