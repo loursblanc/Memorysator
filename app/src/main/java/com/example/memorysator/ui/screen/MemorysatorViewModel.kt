@@ -10,7 +10,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.memorysator.MemorysatorApplication
 import com.example.memorysator.data.ApodPhotosRepository
 import com.example.memorysator.data.Difficulty
-import com.example.memorysator.network.Photo
+import com.example.memorysator.data.model.Photo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

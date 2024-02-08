@@ -4,7 +4,7 @@ package com.example.memorysator
 import com.example.memorysator.data.Difficulty
 import com.example.memorysator.fake.FakeDataSource
 import com.example.memorysator.fake.FakeNetworkApodPhotosRepository
-import com.example.memorysator.network.Photo
+import com.example.memorysator.data.model.Photo
 import com.example.memorysator.rules.TestDipatcherRule
 import com.example.memorysator.ui.screen.MemorysatorViewModel
 import kotlinx.coroutines.test.runTest

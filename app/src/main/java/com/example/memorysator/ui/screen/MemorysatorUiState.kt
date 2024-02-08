@@ -1,8 +1,7 @@
 package com.example.memorysator.ui.screen
 
 import com.example.memorysator.data.Difficulty
-import com.example.memorysator.data.FakeDatasource
-import com.example.memorysator.network.Photo
+import com.example.memorysator.data.model.Photo
 
  enum class ConnectionState(){
      LOADING,

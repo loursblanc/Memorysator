@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.memorysator.R
-import com.example.memorysator.network.Photo
+import com.example.memorysator.data.model.Photo
 
 
 @Composable

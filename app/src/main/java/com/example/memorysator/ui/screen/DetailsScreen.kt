@@ -1,7 +1,5 @@
 package com.example.memorysator.ui.screen
 
-import android.widget.ScrollView
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,13 +24,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.memorysator.R
-import com.example.memorysator.network.Photo
+import com.example.memorysator.data.model.Photo
 
 
 
 
 @Composable
-fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit,photo: Photo, modifier: Modifier = Modifier ) {
+fun DetailsScreen(onBackToMenuButtonClicked: () -> Unit, photo: Photo, modifier: Modifier = Modifier ) {
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,

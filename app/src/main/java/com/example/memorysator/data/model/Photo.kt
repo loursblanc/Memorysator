@@ -1,4 +1,4 @@
-package com.example.memorysator.network
+package com.example.memorysator.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

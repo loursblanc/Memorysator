@@ -1,7 +1,7 @@
 package com.example.memorysator.data
 
 import com.example.memorysator.network.NasaApiService
-import com.example.memorysator.network.Photo
+import com.example.memorysator.data.model.Photo
 
 private const val MAX_PHOTOS = 24
 private const val IMAGE_TYPE = "image"

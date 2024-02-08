@@ -16,8 +16,6 @@ import com.example.memorysator.ui.screen.MainMenuScreen
 import com.example.memorysator.ui.screen.MemorysatorViewModel
 import com.example.memorysator.ui.screen.RulesScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.memorysator.network.Photo
-import kotlinx.coroutines.coroutineScope
 
 
 enum class MemorysatorAppScreens(@StringRes val title: Int){

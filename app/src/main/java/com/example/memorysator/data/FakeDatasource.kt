@@ -1,7 +1,6 @@
 package com.example.memorysator.data
 
-import com.example.memorysator.R
-import com.example.memorysator.network.Photo
+import com.example.memorysator.data.model.Photo
 
 object FakeDatasource {
 
