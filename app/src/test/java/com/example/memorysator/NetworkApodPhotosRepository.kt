@@ -12,6 +12,6 @@ class NetworkApodPhotosRepository {
     @Test
     fun networkApodPhotosRepository_getApodPhotos_verifyPhotoList()= runTest {
         val repository = NetWorkApodPhotosRepository(nasaApiService = FakeNasaApiService())
-        assertEquals(FakeDataSource.mockupPhotosList,repository.getApodPhotos())
+        assertEquals(FakeDataSource.mockupFilteredPhotosList,repository.getApodPhotos())
     }
 }

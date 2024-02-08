@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.memorysator.MemorysatorApplication
@@ -36,13 +37,16 @@ class MemorysatorViewModel (private val apodPhotosRepository: ApodPhotosReposito
         }
     }
 
-    fun getApodPhotos(){
-        viewModelScope.launch {
+    suspend fun getApodPhotos() : List<Photo>{
+
+        var apodPhotos = emptyList<Photo>()
+
+        //viewModelScope.launch {
             _uiState.update { currentState ->
                 currentState.copy(apiState = ConnectionState.LOADING)
             }
             try {
-                val apodPhotos = apodPhotosRepository.getApodPhotos()
+                 apodPhotos = apodPhotosRepository.getApodPhotos()
                 _uiState.update { currentState ->
                     currentState.copy(photos = apodPhotos, apiState = ConnectionState.SUCESS)
                 }
@@ -54,6 +58,27 @@ class MemorysatorViewModel (private val apodPhotosRepository: ApodPhotosReposito
                 _uiState.update { currentState ->
                     currentState.copy(apiState = ConnectionState.ERROR)
                 }
+            }
+        //}
+        return apodPhotos
+    }
+
+    fun getGameCards(){
+       viewModelScope.launch {
+
+            var photos = emptyList<Photo>().toMutableList()
+
+            do{
+                val apodPhotos = getApodPhotos()
+                photos += apodPhotos
+                photos = photos.distinct().toMutableList()
+
+            }while(photos.size < (_uiState.value.gameDifficulty.numberOfCards/2) && _uiState.value.apiState != ConnectionState.ERROR)
+                photos = photos.take(_uiState.value.gameDifficulty.numberOfCards/2).toMutableList()
+                photos += photos
+                photos.shuffle()
+            _uiState.update { currentState ->
+                currentState.copy(photos = photos)
             }
         }
     }

@@ -90,5 +90,24 @@ object FakeDataSource {
             copyright = "Antoine Canel"
         )
     )
+
+
+    val mockupFilteredPhotosList = listOf<Photo>(
+
+        Photo(
+            title = "M2-9: Wings of a Butterfly Nebula",
+            url = "https://apod.nasa.gov/apod/image/0012/m2-9_hst.jpg",
+            explanation = "Are stars better appreciated for their art after they die? Actually, stars usually create their most artistic displays as they die. In the case of low-mass stars like our Sun and M2-9 pictured above, the stars transform themselves from normal stars to white dwarfs by casting off their outer gaseous envelopes. The expended gas frequently forms an impressive display called a planetary nebula that fades gradually over thousand of years. M2-9, a butterfly planetary nebula 2100 light-years away shown in representative colors, has wings that tell a strange but incomplete tale. In the center, two stars orbit inside a gaseous disk 10 times the orbit of Pluto. The expelled envelope of the dying star breaks out from the disk creating the bipolar appearance. Much remains unknown about the physical processes that cause planetary nebulae.",
+            mediaType = "image",
+            copyright = null
+        ),
+        Photo(
+            title = "The Averted Side Of The Moon",
+            url = "https://apod.nasa.gov/apod/image/9910/luna60_unsh_keel.jpg",
+            explanation = "This vintage 60-kopek stamp celebrates a dramatic achievement. On October 7th, forty years ago (7/X/1959), the Soviet interplanetary station which has come to be called \"Luna 3\" successfully photographed the far side of the moon giving denizens of planet Earth their first ever view of this hidden hemisphere. Lacking the digital image technology familiar now, Luna 3 took the pictures on 35mm film which was automatically developed on board. The pictures were then scanned and the signal transmitted to Earth days later in what was perhaps also the first interplanetary fax. In all, seventeen pictures were received providing enough coverage and resolution to construct a far side map and identify a few major features. Depicted on the stamp are regions dubbed the Sea of Moscow, the Soviet Mountains, the Bay of Astronauts, and the Sea of Dreams.",
+            mediaType = "image",
+            copyright = null
+        )
+    )
 }
 
