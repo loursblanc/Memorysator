@@ -16,6 +16,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.io.IOException
 
 class MemorysatorViewModel (private val apodPhotosRepository: ApodPhotosRepository): ViewModel() {
     private val _uiState = MutableStateFlow(MemorysatorUiState())
@@ -35,10 +37,23 @@ class MemorysatorViewModel (private val apodPhotosRepository: ApodPhotosReposito
     }
 
     fun getApodPhotos(){
-        viewModelScope.launch{
-            val apodPhotos = apodPhotosRepository.getApodPhotos()
+        viewModelScope.launch {
             _uiState.update { currentState ->
-                currentState.copy(photos = apodPhotos)
+                currentState.copy(apiState = ConnectionState.LOADING)
+            }
+            try {
+                val apodPhotos = apodPhotosRepository.getApodPhotos()
+                _uiState.update { currentState ->
+                    currentState.copy(photos = apodPhotos, apiState = ConnectionState.SUCESS)
+                }
+            } catch (e: IOException) {
+                _uiState.update { currentState ->
+                    currentState.copy(apiState = ConnectionState.ERROR)
+                }
+            } catch (e: HttpException) {
+                _uiState.update { currentState ->
+                    currentState.copy(apiState = ConnectionState.ERROR)
+                }
             }
         }
     }

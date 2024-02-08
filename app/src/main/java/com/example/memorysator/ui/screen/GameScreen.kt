@@ -2,10 +2,13 @@ package com.example.memorysator.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -25,6 +28,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.memorysator.R
@@ -36,8 +40,53 @@ fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
                onDetailsButtonClicked: (Photo) -> Unit,
                uiState: MemorysatorUiState,
                modifier: Modifier = Modifier ) {
+
+    when(uiState.apiState){
+        ConnectionState.LOADING -> LoadingScreen()
+        ConnectionState.ERROR -> ErrorScreen({})
+        ConnectionState.SUCESS -> SucessScreen(
+            onBackToMenuButtonClicked,
+            onDetailsButtonClicked,
+            uiState.photos
+        )
+
+    }
+}
+
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier) {
+    Image(
+        modifier = modifier.size(200.dp),
+        painter = painterResource(R.drawable.loading_img),
+        contentDescription = stringResource(R.string.loading)
+    )
+}
+
+@Composable
+fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_connection_error), contentDescription = ""
+        )
+        Text(text = "Loading Fail", modifier = Modifier.padding(16.dp))
+        Button(onClick = retryAction) {
+            Text("Retry")
+        }
+    }
+}
+
+@Composable
+fun SucessScreen(onBackToMenuButtonClicked: () -> Unit,
+                 onDetailsButtonClicked: (Photo) -> Unit,
+                 photos: List<Photo>,
+                 modifier: Modifier = Modifier
+) {
     Box(Modifier.fillMaxSize()){
-        GameCardGrid(onDetailsButtonClicked,uiState.photos)
+        GameCardGrid(onDetailsButtonClicked,photos)
         Button(
             onClick = onBackToMenuButtonClicked ,
             Modifier
@@ -49,6 +98,8 @@ fun GameScreen(onBackToMenuButtonClicked: () -> Unit,
         }
     }
 }
+
+
 
 @Composable
 fun GameCardGrid(onDetailsButtonClicked: (Photo) -> Unit, photos: List<Photo>, modifier: Modifier = Modifier){
@@ -77,11 +128,14 @@ fun GameCardCard(photo: Photo, onDetailsButtonClicked: (Photo) -> Unit, modifier
                     .crossfade(true)
                     .build(),
                 contentDescription = "Space",
+                error = painterResource(R.drawable.ic_broken_image),
+                placeholder = painterResource(R.drawable.loading_img),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
             IconButton(onClick = { onDetailsButtonClicked(photo) },
-                Modifier.align(Alignment.BottomEnd)
+                Modifier
+                    .align(Alignment.BottomEnd)
                     .testTag(stringResource(id = R.string.details_button))
             ) {
                 Image(
